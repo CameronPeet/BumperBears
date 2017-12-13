@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 18c5e373bd6cdd241b6b6337253d590b
+timeCreated: 1512728568
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Animator: {instanceID: 0}
+  - Scoreboard: {fileID: 114530369795491138, guid: 397a60c1484fb1a45879589f711a9312,
+      type: 2}
+  executionOrder: 300
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

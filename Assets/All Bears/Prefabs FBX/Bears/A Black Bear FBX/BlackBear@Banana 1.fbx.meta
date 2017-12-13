@@ -1,0 +1,189 @@
+fileFormatVersion: 2
+guid: f0cf9423da574d144a8e1d139b2ca7f5
+timeCreated: 1495239436
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Black_Bear:Car_01_JNT
+    100002: Black_Bear:Head_JNT
+    100004: Black_Bear:Head_Top_JNT
+    100006: Black_Bear:joint2
+    100008: Black_Bear:joint3
+    100010: Black_Bear:joint4
+    100012: Black_Bear:joint5
+    100014: Black_Bear:joint6
+    100016: Black_Bear:L_Ankle_JNT
+    100018: Black_Bear:L_Ball_JNT
+    100020: Black_Bear:L_Clavicle_JNT
+    100022: Black_Bear:L_Ear_01_JNT
+    100024: Black_Bear:L_Ear_02_JNT
+    100026: Black_Bear:L_Ear_03_JNT
+    100028: Black_Bear:L_Elbow_JNT1
+    100030: Black_Bear:L_Forearm_JNT1
+    100032: Black_Bear:L_Hand_JNT3
+    100034: Black_Bear:L_Hip_JNT
+    100036: Black_Bear:L_Knee_JNT
+    100038: Black_Bear:L_Shoulder_JNT1
+    100040: Black_Bear:L_Toe_JNT
+    100042: Black_Bear:L_Toe_JNT1
+    100044: Black_Bear:Main_Root_JNT
+    100046: Black_Bear:Neck_01_JNT
+    100048: Black_Bear:Neck_02_JNT
+    100050: Black_Bear:R_Ankle_JNT
+    100052: Black_Bear:R_Ball_JNT
+    100054: Black_Bear:R_Clavicle_JNT
+    100056: Black_Bear:R_Ear_01_JNT
+    100058: Black_Bear:R_Ear_02_JNT
+    100060: Black_Bear:R_Ear_03_JNT
+    100062: Black_Bear:R_Elbow_JNT
+    100064: Black_Bear:R_Forearm_JNT
+    100066: Black_Bear:R_Hand_JNT
+    100068: Black_Bear:R_Hip_JNT
+    100070: Black_Bear:R_Knee_JNT
+    100072: Black_Bear:R_Shoulder_JNT
+    100074: Black_Bear:Spine_01_JNT
+    100076: Black_Bear:Spine_02_JNT
+    100078: Black_Bear:Spine_03_JNT
+    100080: Black_Bear:Spine_04_JNT
+    100082: Black_Bear:Spine_05_JNT
+    100084: Black_Bear:Spine_06_JNT
+    100086: Black_Bear:Spine_07_JNT
+    100088: Black_Bear:Steering_Wheel_01_JNT
+    100090: Black_Bear:Steering_Wheel_02_JNT
+    100092: Black_Bear:Tai_l01_JNT
+    100094: Black_Bear:Tail_02_JNT
+    100096: Black_Bear:Tail_03_JNT
+    100098: //RootNode
+    100100: BlackBear_Donut
+    100102: BlackBear_Mesh
+    100104: BlackBear_Root
+    400000: Black_Bear:Car_01_JNT
+    400002: Black_Bear:Head_JNT
+    400004: Black_Bear:Head_Top_JNT
+    400006: Black_Bear:joint2
+    400008: Black_Bear:joint3
+    400010: Black_Bear:joint4
+    400012: Black_Bear:joint5
+    400014: Black_Bear:joint6
+    400016: Black_Bear:L_Ankle_JNT
+    400018: Black_Bear:L_Ball_JNT
+    400020: Black_Bear:L_Clavicle_JNT
+    400022: Black_Bear:L_Ear_01_JNT
+    400024: Black_Bear:L_Ear_02_JNT
+    400026: Black_Bear:L_Ear_03_JNT
+    400028: Black_Bear:L_Elbow_JNT1
+    400030: Black_Bear:L_Forearm_JNT1
+    400032: Black_Bear:L_Hand_JNT3
+    400034: Black_Bear:L_Hip_JNT
+    400036: Black_Bear:L_Knee_JNT
+    400038: Black_Bear:L_Shoulder_JNT1
+    400040: Black_Bear:L_Toe_JNT
+    400042: Black_Bear:L_Toe_JNT1
+    400044: Black_Bear:Main_Root_JNT
+    400046: Black_Bear:Neck_01_JNT
+    400048: Black_Bear:Neck_02_JNT
+    400050: Black_Bear:R_Ankle_JNT
+    400052: Black_Bear:R_Ball_JNT
+    400054: Black_Bear:R_Clavicle_JNT
+    400056: Black_Bear:R_Ear_01_JNT
+    400058: Black_Bear:R_Ear_02_JNT
+    400060: Black_Bear:R_Ear_03_JNT
+    400062: Black_Bear:R_Elbow_JNT
+    400064: Black_Bear:R_Forearm_JNT
+    400066: Black_Bear:R_Hand_JNT
+    400068: Black_Bear:R_Hip_JNT
+    400070: Black_Bear:R_Knee_JNT
+    400072: Black_Bear:R_Shoulder_JNT
+    400074: Black_Bear:Spine_01_JNT
+    400076: Black_Bear:Spine_02_JNT
+    400078: Black_Bear:Spine_03_JNT
+    400080: Black_Bear:Spine_04_JNT
+    400082: Black_Bear:Spine_05_JNT
+    400084: Black_Bear:Spine_06_JNT
+    400086: Black_Bear:Spine_07_JNT
+    400088: Black_Bear:Steering_Wheel_01_JNT
+    400090: Black_Bear:Steering_Wheel_02_JNT
+    400092: Black_Bear:Tai_l01_JNT
+    400094: Black_Bear:Tail_02_JNT
+    400096: Black_Bear:Tail_03_JNT
+    400098: //RootNode
+    400100: BlackBear_Donut
+    400102: BlackBear_Mesh
+    400104: BlackBear_Root
+    4300000: BlackBear_Mesh
+    4300002: BlackBear_Donut
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: BlackBear_Donut
+    13700002: BlackBear_Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

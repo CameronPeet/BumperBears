@@ -80,14 +80,14 @@ public class Player : MonoBehaviour
     {
         if (PlayingAndEnabled)
         {
-            if (UnityEngine.Input.GetButtonDown(Input.StartButton))
+            if (UnityEngine.Input.GetButtonDown(Input.SelectButton))
             {
                 if(Scoreboard)
                 {
                     Scoreboard.Activate();
                 }
             }
-            if (UnityEngine.Input.GetButtonUp(Input.StartButton))
+            if (UnityEngine.Input.GetButtonUp(Input.SelectButton))
             {
                 if(Scoreboard)
                 {
@@ -97,10 +97,10 @@ public class Player : MonoBehaviour
 
             if(UnityEngine.Input.GetButtonDown(Input.AButton))
             {
-                if(Scoreboard)
-                {
-                    ScoreboardManager.Scoreboard.SetScore(gameObject.name, "asd", 10);
-                }
+                //if(Scoreboard)
+                //{
+                //    ScoreboardManager.Scoreboard.SetScore(gameObject.name, "asd", 10);
+                //}
             }
         }
 

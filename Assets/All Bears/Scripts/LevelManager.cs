@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour {
 
     static bool s_Instantiated;
-    public bool s_DualMonitorMode = true;
     public bool DebugMode = false;
 
     //Variables for the game setup
@@ -78,9 +77,13 @@ public class LevelManager : MonoBehaviour {
     public void LoadNextLevel()
     {
         //print(AllLevels[LevelIndex]);
-        //ScreenFader.LoadScene(AllLevels[LevelIndex]);
-        //SceneManager.LoadScene(AllLevels[LevelIndex]);
-        SceneManager.LoadScene("IceArena");
+        if(LevelIndex >= AllLevels.Count - 1)
+        {
+            LevelIndex = 0;
+        }
+        ScreenFader.LoadScene(AllLevels[LevelIndex]);
+        SceneManager.LoadScene(AllLevels[LevelIndex]);
+        //SceneManager.LoadScene("IceArena");
         LevelIndex++;
     }
 
@@ -89,7 +92,7 @@ public class LevelManager : MonoBehaviour {
         ScreenFader.FadeScreen();
     }
 
-    public void FadeScreenIn()
+    public void FadeScreenI()
     {
         ScreenFader.FadePanelOut();
     }
@@ -99,7 +102,7 @@ public class LevelManager : MonoBehaviour {
         players.CopyTo(Players);
         PlayerCount = players.Count;
 
-        if (s_DualMonitorMode)
+        if (Settings.bDualScreensEnabled)
         {
             int monitor_count = Display.displays.Length;
 
@@ -139,6 +142,31 @@ public class LevelManager : MonoBehaviour {
                 CameraSetter.Set1of4(cam1, Players[0].GetComponent<HoverCarControl>());
                 CameraSetter.Set2of4(cam2, Players[1].GetComponent<HoverCarControl>());
                 CameraSetter.Set3of4(cam3, Players[2].GetComponent<HoverCarControl>());
+
+                Rect rect = new Rect();
+                rect.x = 0.0f;
+                rect.width = 1.0f;
+                rect.y = 0.0f;
+                rect.height = 1.0f;
+                cam1.rect = rect;
+                cam1.targetDisplay = 0;
+                Players[0].GetComponent<HoverCarControl>().cameraRect = rect;
+
+                rect.x = 0.0f;
+                rect.width = .5f;
+                rect.y = 0.0f;
+                rect.height = .5f;
+                cam2.rect = rect;
+                cam2.targetDisplay = 1;
+                Players[1].GetComponent<HoverCarControl>().cameraRect = rect;
+
+                rect.x = 0.5f;
+                rect.width = 1.0f;
+                rect.y = 0.5f;
+                rect.height = 1.0f;
+                cam3.rect = rect;
+                cam3.targetDisplay = 1;
+                Players[2].GetComponent<HoverCarControl>().cameraRect = rect;
             }
 
             else if (PlayerCount == 4)
@@ -151,6 +179,39 @@ public class LevelManager : MonoBehaviour {
                 CameraSetter.Set2of4(cam2, Players[1].GetComponent<HoverCarControl>());
                 CameraSetter.Set3of4(cam3, Players[2].GetComponent<HoverCarControl>());
                 CameraSetter.Set4of4(cam4, Players[3].GetComponent<HoverCarControl>());
+
+                Rect rect = new Rect();
+                rect.x = 0.0f;
+                rect.width = .5f;
+                rect.y = 0.0f;
+                rect.height = 1.0f;
+                cam1.rect = rect;
+                cam1.targetDisplay = 0;
+                Players[0].GetComponent<HoverCarControl>().cameraRect = rect;
+
+                rect.x = 0.5f;
+                rect.width = 1.0f;
+                rect.y = 0.0f;
+                rect.height = 1.0f;
+                cam2.rect = rect;
+                cam2.targetDisplay = 0;
+                Players[1].GetComponent<HoverCarControl>().cameraRect = rect;
+
+                rect.x = 0.0f;
+                rect.width = .5f;
+                rect.y = 0.0f;
+                rect.height = 1.0f;
+                cam3.rect = rect;
+                cam3.targetDisplay = 1;
+                Players[2].GetComponent<HoverCarControl>().cameraRect = rect;
+
+                rect.x = 0.5f;
+                rect.width = 1.0f;
+                rect.y = 0.0f;
+                rect.height = 1.0f;
+                cam4.rect = rect;
+                cam4.targetDisplay = 1;
+                Players[3].GetComponent<HoverCarControl>().cameraRect = rect;
             }
         }
         else
@@ -226,6 +287,11 @@ public class LevelManager : MonoBehaviour {
 
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 
     public void EnableDualMonitors()
     {
@@ -238,6 +304,6 @@ public class LevelManager : MonoBehaviour {
                  }
 #endif
 
-        s_DualMonitorMode = true;
+        Settings.bDualScreensEnabled = true;
     }
 }

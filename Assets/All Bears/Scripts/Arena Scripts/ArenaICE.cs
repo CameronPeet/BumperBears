@@ -85,7 +85,7 @@ public class ArenaICE :  IArena
 
     public virtual void OnArenaExit()
     {
-        //LevelManager.LoadNextLevel();
+        LevelManager.LoadNextLevel();
     }
 
     public virtual void OnPlayerDeath(int PlayerID)
@@ -126,6 +126,22 @@ public class ArenaICE :  IArena
                     WinningPlayer.GetComponent<HoverCarControl>().BearCamera.DORect(new Rect(0, 0, 1, 1), 1.0f);
                     WinningPlayer.PlayingAndEnabled = false;
                     WinningPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+                    Scoreboard scoreboard = WinningPlayer.GetComponent<Player>().Scoreboard;
+                    if (WinningPlayer.GetComponent<Player>().Scoreboard)
+                    {
+                        if(scoreboard)
+                        {
+                            ScoreboardManager.Scoreboard.SetScore(WinningPlayer.gameObject.name, "asd", 10);
+
+                            if(scoreboard.Score >= 500)
+                            {
+                                OnArenaExit();
+                            }
+                        }
+
+
+                    }
                     //player.GetComponent<PlayerAnimator>().StartRotateCameraAroundPlayer();
                     return;
                 }

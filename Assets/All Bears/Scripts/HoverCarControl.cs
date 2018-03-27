@@ -222,7 +222,7 @@ public class HoverCarControl : MonoBehaviour
         if (Airborne >= 4)
         {
             m_currThrust /= 5.0f;
-            m_body.AddForce(-Vector3.up * m_hoverForce);
+            m_body.AddForce(-Vector3.up * m_hoverForce * m_downForceMultiplier);
         }
             //return;
 

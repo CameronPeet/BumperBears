@@ -15,6 +15,11 @@ public struct PlayerData
 [RequireComponent(typeof(Rigidbody))]
 public class HoverCarControl : MonoBehaviour
 {
+
+    private int MaxDashes = 4;
+    private int NumDashes = 4;
+    private float RestoreTimer = 3.0f;
+    private float restoretime = 0.0f;
     //public PlayerData playerData;
     public Camera BearCamera;
     private Animator Animator;
@@ -105,7 +110,29 @@ public class HoverCarControl : MonoBehaviour
             }
         }
     }
-	
+
+    void TickCharge()
+    {
+        if(NumDashes < MaxDashes)
+        {
+            restoretime += Time.deltaTime;
+            if(restoretime >= RestoreTimer)
+            {
+                NumDashes++;
+                if(NumDashes < MaxDashes)
+                {
+                    // minus the Restore Timer so the overflow continues into next frame. Minor accuracy improvement
+                    restoretime -= RestoreTimer;
+                }
+                else
+                {
+                    // Set to zero. We don't want the overflow to continue.
+                    restoretime = 0.0f;
+                }
+            }
+        }
+    }
+
     void Update()
     {
         if (!m_player.PlayingAndEnabled)
@@ -122,11 +149,12 @@ public class HoverCarControl : MonoBehaviour
             thrust = -1.0f;
         }
         float turn = Input.GetAxis(m_player.Input.LAnalogXAxis);
+
         if (Input.GetButtonDown(m_player.Input.LeftBumper) 
         || Input.GetButtonDown(m_player.Input.RightBumper
         ))
         {
-            Charge();
+                Charge();
         }
 
 
@@ -148,6 +176,8 @@ public class HoverCarControl : MonoBehaviour
             falling = false;
             GetComponent<Animator>().Play("Idle");
         }
+
+        TickCharge();
     }
     public void Accelerate(float axis)
     {
@@ -167,11 +197,18 @@ public class HoverCarControl : MonoBehaviour
 
     public void Charge()
     {
+        //Return if no charges are available. Naming convention is off using Dashes = Charges I know..
+        if (NumDashes <= 0)
+            return;
+
+
         GetComponent<Rigidbody>().AddForce(transform.forward * m_impulseForce, ForceMode.Impulse);
         GetComponent<Rigidbody>().AddForceAtPosition(transform.forward * m_impulseForce / 10.0f, transform.position + transform.forward, ForceMode.Impulse);
         Instantiate(Dash, gameObject.transform);
         //GetComponentInChildren<ParticleSystem>().Play();
         Animator.Play("Fast");
+
+        NumDashes--;
     }
 
     void FixedUpdate()
@@ -245,4 +282,5 @@ public class HoverCarControl : MonoBehaviour
         }
 
     }
+
 }

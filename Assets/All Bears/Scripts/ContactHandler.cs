@@ -58,15 +58,8 @@ public class ContactHandler : MonoBehaviour {
             if (contactedThisFrame)
                 return;
 
-            //gameObject.GetComponentInChildren<MeshRenderer>().sharedMaterial.DOColor(new Color(1.0f, 1.0f, 1.0f), 2.0f).SetEase(Ease.Flash);
-
             ContactHandler handler = collision.gameObject.GetComponent<ContactHandler>();
             float otherPrevVelocity = handler.GetPreviousVelocity();
-
-            //Vector3 v = collision.relativeVelocity;
-            //float SignedMagnitude = v.x * Mathf.Abs(v.x) + v.y * Mathf.Abs(v.y) + v.z * Mathf.Abs(v.z);
-            //print(SignedMagnitude);
-            //turn;
 
             Quaternion rot = new Quaternion(0, 0, 0, 0);
             Vector3 pos = contact.point;
@@ -83,7 +76,7 @@ public class ContactHandler : MonoBehaviour {
             if (side < 0.0f)
             {
                 Vector3 forceDir = -contact.normal;
-                Vector3 force = forceDir * AddedForceMultiplier * 10;
+                Vector3 force = forceDir * ((AddedForceMultiplier * 10) * Mathf.Abs(PreviousVelocity / 30.0f));
                 Vector3 forcePos = -contact.point;
 
 
@@ -109,7 +102,7 @@ public class ContactHandler : MonoBehaviour {
             else if (side > 0.0f)
             {
                 Vector3 forceDir = contact.normal;
-                Vector3 force = forceDir * AddedForceMultiplier * 10;
+                Vector3 force = forceDir * ((AddedForceMultiplier * 10) *  (Mathf.Abs(PreviousVelocity / 30.0f)));
                 Vector3 forcePos = -contact.point;
 
                 GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);

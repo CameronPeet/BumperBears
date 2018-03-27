@@ -48,6 +48,14 @@ public class ArenaICE :  IArena
             }
         }
 
+        //if(Input.GetButtonDown("Cancel"))
+        //{
+        //    Player[] players = FindObjectsOfType<Player>(); 
+        //    foreach(Player player in players)
+        //    {
+        //        player.GetComponent<HoverCarControl>().GetComponent<Animator>().Play("Banana");
+        //    }
+        //}
         if (m_RoundOver && !m_RoundInProgress)
         {
             if (LevelManager.ScreenFader.FadingIn)
@@ -122,10 +130,15 @@ public class ArenaICE :  IArena
                     WinningPlayer = player;
                     //WinningPlayer.DisablePlay();
                     player.GetComponent<HoverCarControl>().BearCamera.depth = 100;
-                    player.GetComponent<Transform>().position = new Vector3(0, 0.5f, 0);
+                    player.GetComponent<Transform>().position = new Vector3(0, -0.5f, 0);
+                    player.GetComponent<Transform>().rotation = Quaternion.Euler(Vector3.zero);
                     WinningPlayer.GetComponent<HoverCarControl>().BearCamera.DORect(new Rect(0, 0, 1, 1), 1.0f);
                     WinningPlayer.PlayingAndEnabled = false;
                     WinningPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                    WinningPlayer.GetComponent<Animator>().Play("Idle");
+                    WinningPlayer.GetComponent<HoverCarControl>().BearCamera.GetComponent<HoverFollowCam>().enabled = false;
+                    WinningPlayer.GetComponent<HoverCarControl>().BearCamera.GetComponent<HoverFollowCam>().transform.position = WinningPlayer.transform.position + WinningPlayer.transform.forward * 5.0f + (Vector3.up * 2.0f);
+                    WinningPlayer.GetComponent<HoverCarControl>().BearCamera.GetComponent<HoverFollowCam>().transform.DOLookAt(WinningPlayer.transform.position, 1.0f);
 
                     Scoreboard scoreboard = WinningPlayer.GetComponent<Player>().Scoreboard;
                     if (WinningPlayer.GetComponent<Player>().Scoreboard)
@@ -156,7 +169,7 @@ public class ArenaICE :  IArena
         m_RoundOver = true;
 
         WinningPlayer.GetComponent<HoverCarControl>().BearCamera.DORect(WinningPlayer.GetComponent<HoverCarControl>().cameraRect, 1.0f);
-
+        WinningPlayer.GetComponent<HoverCarControl>().BearCamera.GetComponent<HoverFollowCam>().enabled = true;
 
         LevelManager.FadeScreen();
 

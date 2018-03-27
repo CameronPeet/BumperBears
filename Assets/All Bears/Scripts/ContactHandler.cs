@@ -81,6 +81,8 @@ public class ContactHandler : MonoBehaviour {
                 collision.gameObject.GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
                 collision.gameObject.GetComponent<Animator>().Play("Impact");
 
+                gameObject.GetComponent<Rigidbody>().AddForce(-gameObject.GetComponent<Rigidbody>().velocity);
+
                 if(handler != null)
                 {
                     handler.contactedThisFrame = true;
@@ -95,6 +97,8 @@ public class ContactHandler : MonoBehaviour {
 
                 GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
                 GetComponent<Animator>().Play("Impact");
+
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(-collision.gameObject.GetComponent<Rigidbody>().velocity);
 
                 foreach (Orb orb in gameObject.GetComponentsInChildren<Orb>())
                 {

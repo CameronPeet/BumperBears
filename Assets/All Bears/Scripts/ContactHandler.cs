@@ -2,9 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using DG.Tweening;
+
 public class ContactHandler : MonoBehaviour {
 
+    [Header("Hit | Tweens")]
+    public Ease ColorEase;
+    public Color HitColor;
+    public float Intensity;
+    public float TweenLength;
+
+    [Header("Hit | Strengths")]
     public float AddedForceMultiplier = 1000.0f;
+
+    [Header("Hit | Audio Visual")]
     public GameObject HitEffect;
     public AudioClip HitSound;
     public AudioSource AudioSource;
@@ -47,6 +58,8 @@ public class ContactHandler : MonoBehaviour {
             if (contactedThisFrame)
                 return;
 
+            //gameObject.GetComponentInChildren<MeshRenderer>().sharedMaterial.DOColor(new Color(1.0f, 1.0f, 1.0f), 2.0f).SetEase(Ease.Flash);
+
             ContactHandler handler = collision.gameObject.GetComponent<ContactHandler>();
             float otherPrevVelocity = handler.GetPreviousVelocity();
 
@@ -57,7 +70,8 @@ public class ContactHandler : MonoBehaviour {
 
             Quaternion rot = new Quaternion(0, 0, 0, 0);
             Vector3 pos = contact.point;
-            Instantiate(HitEffect, pos, rot);
+            GameObject obj = Instantiate(HitEffect, pos, rot, transform);
+
             AudioSource.pitch = Random.Range(startPitch - 0.5f, startPitch + 0.5f);
             AudioSource.PlayOneShot(HitSound);
 
@@ -80,10 +94,13 @@ public class ContactHandler : MonoBehaviour {
 
                 collision.gameObject.GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
                 collision.gameObject.GetComponent<Animator>().Play("Impact");
+                collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOComplete();
+                collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
 
-                gameObject.GetComponent<Rigidbody>().AddForce(-gameObject.GetComponent<Rigidbody>().velocity);
+                GetComponent<Rigidbody>().angularVelocity *=  0.1f;
+                GetComponent<Rigidbody>().velocity *= 0.1f;
 
-                if(handler != null)
+                if (handler != null)
                 {
                     handler.contactedThisFrame = true;
                     
@@ -97,8 +114,12 @@ public class ContactHandler : MonoBehaviour {
 
                 GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
                 GetComponent<Animator>().Play("Impact");
+                GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOComplete();
+                GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
 
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(-collision.gameObject.GetComponent<Rigidbody>().velocity);
+
+                collision.gameObject.GetComponent<Rigidbody>().angularVelocity *= 0.1f;
+                collision.gameObject.GetComponent<Rigidbody>().velocity *= 0.1f;
 
                 foreach (Orb orb in gameObject.GetComponentsInChildren<Orb>())
                 {

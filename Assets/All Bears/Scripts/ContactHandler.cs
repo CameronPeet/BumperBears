@@ -30,8 +30,11 @@ public class ContactHandler : MonoBehaviour {
 
     List<string> bearsHitBy;
 
+    Color cacheColor;
+
 	// Use this for initialization
 	void Start () {
+        cacheColor = GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.color;
         AudioSource = GetComponent<AudioSource>();
         startPitch = AudioSource.pitch;
         bearsHitBy = new List<string>();
@@ -50,7 +53,7 @@ public class ContactHandler : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint contact = collision.contacts[0];
-        if(contact.otherCollider.gameObject.tag == "BumperBear")
+        if (contact.otherCollider.gameObject.tag == "BumperBear")
         {
             if (bearsHitBy.Contains(contact.otherCollider.gameObject.name))
                 return;
@@ -90,19 +93,19 @@ public class ContactHandler : MonoBehaviour {
                 collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOComplete();
                 collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
 
-                GetComponent<Rigidbody>().angularVelocity *=  0.1f;
+                GetComponent<Rigidbody>().angularVelocity *= 0.1f;
                 GetComponent<Rigidbody>().velocity *= 0.1f;
 
                 if (handler != null)
                 {
                     handler.contactedThisFrame = true;
-                    
+
                 }
             }
             else if (side > 0.0f)
             {
                 Vector3 forceDir = contact.normal;
-                Vector3 force = forceDir * ((AddedForceMultiplier * 10) *  (Mathf.Abs(PreviousVelocity / 30.0f)));
+                Vector3 force = forceDir * ((AddedForceMultiplier * 10) * (Mathf.Abs(PreviousVelocity / 30.0f)));
                 Vector3 forcePos = -contact.point;
 
                 GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
@@ -124,8 +127,39 @@ public class ContactHandler : MonoBehaviour {
 
             StartCoroutine(PreventHitBy(collision.gameObject.name, 1.0f));
             StartCoroutine(handler.PreventHitBy(gameObject.name, 1.0f));
+
+        }
+
+        else if (collision.gameObject.tag == "Traps")
+        {
+
+            Quaternion rot = new Quaternion(0, 0, 0, 0);
+            Vector3 pos = contact.point;
+            GameObject obj = Instantiate(HitEffect, pos, rot, transform);
+
+            AudioSource.pitch = Random.Range(startPitch - 0.5f, startPitch + 0.5f);
+            AudioSource.PlayOneShot(HitSound);
+
+            Vector3 forceDir = collision.transform.forward + (transform.up * 0.1f);
+            Vector3 force = forceDir * ((AddedForceMultiplier * 10));
+            Vector3 forcePos = contact.point;
+
+
+            foreach (Orb orb in collision.gameObject.GetComponentsInChildren<Orb>())
+            {
+                orb.Drop();
+            }
+
+            GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
+            GetComponent<Animator>().Play("Impact");
+            GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOComplete();
+            GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
+
+            GetComponent<Rigidbody>().angularVelocity *= 0.1f;
+            GetComponent<Rigidbody>().velocity *= 0.1f;
         }
     }
+
 
     public float GetPreviousVelocity()
     {
@@ -143,5 +177,9 @@ public class ContactHandler : MonoBehaviour {
 
         bearsHitBy.Remove(name);
     }
-      
+
+    private void OnDestroy()
+    {
+        GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.color = cacheColor;
+    }
 }

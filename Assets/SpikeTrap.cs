@@ -48,23 +48,21 @@ public class SpikeTrap : MonoBehaviour {
     private IEnumerator Reverse()
     {
         float timer = 0.0f;
+		print ("Started");
+
+		yield return new WaitForSeconds (TweenTime * 2.0f);
+
+		/*
         while(timer <= TweenTime * 2.0f + 1.0f)
         {
             timer += Time.deltaTime;
 
             yield return new WaitForEndOfFrame();
-        }
+        }*/
 
         Spikes.transform.DOMove(Spikes.transform.position - Spikes.transform.forward * distance, TweenTime).SetEase(EasingType);
 
-        timer = 0.0f;
-        while (timer <= TweenTime)
-        {
-            timer += Time.deltaTime;
-
-            yield return new WaitForEndOfFrame();
-        }
-
+		yield return new WaitForSeconds (TweenTime);
         Triggered = false;
 
     }

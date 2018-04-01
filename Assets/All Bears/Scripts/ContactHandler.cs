@@ -47,7 +47,7 @@ public class ContactHandler : MonoBehaviour {
 
         contactedThisFrame = false;
 
-        PreviousVelocity = m_rigidBody.velocity.magnitude;
+        PreviousVelocity = Mathf.Abs(m_rigidBody.velocity.magnitude);
 	}
 
     private void OnCollisionEnter(Collision collision)
@@ -60,6 +60,8 @@ public class ContactHandler : MonoBehaviour {
 
             if (contactedThisFrame)
                 return;
+
+            print(gameObject.name + " is being hit by" + collision.gameObject.name);
 
             ContactHandler handler = collision.gameObject.GetComponent<ContactHandler>();
             float otherPrevVelocity = handler.GetPreviousVelocity();
@@ -76,8 +78,13 @@ public class ContactHandler : MonoBehaviour {
 
             float side = otherPrevVelocity - PreviousVelocity;
 
+            //~~~~A check incase this script is run before the other Contact Handler~~~
+            //Check if the one that got hit harder is the "Other bear"
+            //(We already ignore bears added to our contact list for this frame / delay.
             if (side < 0.0f)
             {
+
+
                 Vector3 forceDir = -contact.normal;
                 Vector3 force = forceDir * ((AddedForceMultiplier * 10) * Mathf.Abs(PreviousVelocity / 30.0f));
                 Vector3 forcePos = -contact.point;
@@ -93,6 +100,8 @@ public class ContactHandler : MonoBehaviour {
                 collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOComplete();
                 collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
 
+                print("Velocity nulled for " + gameObject.name);
+
                 GetComponent<Rigidbody>().angularVelocity *= 0.1f;
                 GetComponent<Rigidbody>().velocity *= 0.1f;
 
@@ -102,6 +111,8 @@ public class ContactHandler : MonoBehaviour {
 
                 }
             }
+
+            // The bear this script is attached to is the one being "Hit".
             else if (side > 0.0f)
             {
                 Vector3 forceDir = contact.normal;
@@ -114,6 +125,7 @@ public class ContactHandler : MonoBehaviour {
                 GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
 
 
+                print("Side > 0 : Velocity nulled for " + collision.gameObject.name);
                 collision.gameObject.GetComponent<Rigidbody>().angularVelocity *= 0.1f;
                 collision.gameObject.GetComponent<Rigidbody>().velocity *= 0.1f;
 
@@ -126,7 +138,7 @@ public class ContactHandler : MonoBehaviour {
             }
 
             StartCoroutine(PreventHitBy(collision.gameObject.name, 1.0f));
-            StartCoroutine(handler.PreventHitBy(gameObject.name, 1.0f));
+            handler.StartCoroutine(handler.PreventHitBy(gameObject.name, 1.0f));
 
         }
 

@@ -47,13 +47,7 @@ public class PlayerSpawner : MonoBehaviour {
 
     IEnumerator RoundRobinReset(int IndexToReset)
     {
-        var timer = 0.0f;
-        var wait = 5.0f;
-        while(timer < wait)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(5.0f);
 
         RoundRobin[IndexToReset].UsedRecently = false;
     }

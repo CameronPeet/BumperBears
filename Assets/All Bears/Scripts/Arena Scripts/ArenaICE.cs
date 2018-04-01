@@ -7,6 +7,8 @@ using DG.Tweening;
 public class ArenaICE :  IArena
 {
 
+
+
     //Pre-requisites
     protected LevelManager LevelManager;
     protected PlayerSpawner PlayerSpawner;
@@ -48,14 +50,6 @@ public class ArenaICE :  IArena
             }
         }
 
-        //if(Input.GetButtonDown("Cancel"))
-        //{
-        //    Player[] players = FindObjectsOfType<Player>(); 
-        //    foreach(Player player in players)
-        //    {
-        //        player.GetComponent<HoverCarControl>().GetComponent<Animator>().Play("Banana");
-        //    }
-        //}
         if (m_RoundOver && !m_RoundInProgress)
         {
             if (LevelManager.ScreenFader.FadingIn)
@@ -89,6 +83,11 @@ public class ArenaICE :  IArena
         //Players = LevelManager.Players;
 
         m_PlayersLeft = Players.Length;
+
+        if(m_PlayersLeft == 0)
+        {
+            
+        }
     }
 
     public virtual void OnArenaExit()

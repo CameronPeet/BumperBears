@@ -68,6 +68,7 @@ public class LevelManager : MonoBehaviour {
         if (DebugMode)
         {
             CreateDebugPlayers();
+            print("DebugMode");
         }
     }
     public void LoadScene(string SceneName)

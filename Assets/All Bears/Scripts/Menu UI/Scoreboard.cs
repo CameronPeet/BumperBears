@@ -19,11 +19,20 @@ public class Scoreboard : MonoBehaviour {
     //Level manager is executed first in SEOrder, and so need to call subbing manually.
     private bool Subscribed = false;
 
+    //private static bool Instanced = false;
+
     Dictionary<string, ScoreboardEntry> playerScores;
 
     
     // Use this for initialization
     void Start () {
+
+        //if(Instanced)
+        //{
+        //    Destroy(gameObject);
+        //}
+
+        //Instanced = true;
 
         if (!Subscribed)
         {
@@ -88,6 +97,15 @@ public class Scoreboard : MonoBehaviour {
         if(playerScores == null)
         {
             playerScores = new Dictionary<string, ScoreboardEntry>();
+        }
+        if (PlayerRowPrefab == null)
+        {
+            print("Player Row Prefab = null, should not = null!");
+        }
+
+        if(ScoreBoardPanel == null)
+        {
+            print("ScoreBoardPanel = null, should not = null!");
         }
 
         ScoreboardEntry tablerow = Instantiate(PlayerRowPrefab, ScoreBoardPanel.transform);

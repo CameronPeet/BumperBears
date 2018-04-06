@@ -11,12 +11,6 @@ public class DirectionalFloating : EffectBase
 	[SerializeField]
 	private Vector2 MoveOffset = Vector2.zero;
 
-	void Start ()
-	{
-		Animate();
-
-	}
-
 	public override void Animate ()
 	{
 		rect.DOAnchorPos (originalPosition + MoveOffset, settings.easeDuration).SetEase (settings.easeType).SetLoops (settings.loop ? -1 : 0, settings.loopType);

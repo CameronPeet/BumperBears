@@ -3,22 +3,24 @@ using DG.Tweening;
 using UnityEngine;
 
 public class EffectBase : MonoBehaviour
-{
+{	
+	[Header("Animation Settings")]
 	[SerializeField]
 	protected AnimationSettings settings;
 
-	// [SerializeField]
 	protected RectTransform rect;
 
+	protected Vector2 originalScale;
 	protected Vector2 originalPosition;
 
-	private void Awake ()
+	protected virtual void Awake ()
 	{
 		rect = GetComponent<RectTransform> ();
 		originalPosition = (Vector2) rect.anchoredPosition;
+		originalScale = (Vector2)rect.localScale;
 	}
 
-	void Start ()
+	protected virtual void Start ()
 	{
 		if (settings.animateFromStart)
 		{
@@ -47,3 +49,27 @@ public enum Direction
 	Vertical,
 	Both
 };
+
+[System.Serializable]
+public class RectMenuItem
+{
+	public RectTransform rect;
+
+	public UnityEngine.UI.Button button;
+
+	public Vector2 originalPosition
+	{
+		get { return originalPosition; }
+		set { originalPosition = value; }
+	}
+
+	public void Hide (bool right = true, bool instant = false)
+	{
+		rect.DOAnchorPosX (1280 * (right ? 1 : -1), instant ? 0 : 1).SetEase(Ease.OutQuad);
+	}
+
+	public void Show (bool instant = false)
+	{
+		rect.DOAnchorPosX (0, instant ? 0 : 1).SetEase(Ease.OutQuad);
+	}
+}

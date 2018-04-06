@@ -75,6 +75,7 @@ public class LevelManager : MonoBehaviour {
     {
         SceneManager.LoadScene(SceneName);
     }
+
     public void LoadNextLevel()
     {
         //print(AllLevels[LevelIndex]);

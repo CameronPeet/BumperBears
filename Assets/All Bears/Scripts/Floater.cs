@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Floater : MonoBehaviour {
 
-    private Transform seaPlane;
-    private Cloth planeCloth;
+    public Transform seaPlane;
+    public Cloth planeCloth;
     private int closestVertexIndex = -1;
 
     public float YOffset = 1.5f;
 	// Use this for initialization
 	void Start () {
-        seaPlane = GetComponentInParent<WavesController>().gameObject.transform;
-        planeCloth = seaPlane.GetComponent<Cloth>();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        GetClosestVertex();
+        if(planeCloth != null)
+            GetClosestVertex();
 	}
 
     void GetClosestVertex()

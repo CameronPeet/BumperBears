@@ -448,7 +448,7 @@ namespace GreatArcStudios
                 pauseMenu.text = "Pause Menu";
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape) && mainPanel.active == false)
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Start") && mainPanel.active == false )
             {
 
                 uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
@@ -467,7 +467,7 @@ namespace GreatArcStudios
                      blurEffect.enabled = true;
                  }  */
             }
-            else if(Input.GetKeyDown(KeyCode.Escape) && mainPanel.active == true) {
+            else if(Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Start") && mainPanel.active == true) {
                 Time.timeScale = timeScale;
                 mainPanel.SetActive(false);
                 vidPanel.SetActive(false);
@@ -1086,11 +1086,26 @@ namespace GreatArcStudios
                 //If the resoultion matches the current resoution height and width then go through the statement.
                 if (allRes[i].height == currentRes.height && allRes[i].width == currentRes.width)
                 {
+
+                    if(i == allRes.Length -1)
+                    {
+
+                    }
                     //Debug.Log("found " + i);
                     //If the user is playing fullscreen. Then set the resoution to one element higher in the array, set the full screen boolean to true, reset the current resolution, and then update the resolution label.
-                    if (isFullscreen == true) { Screen.SetResolution(allRes[i + 1].width, allRes[i + 1].height, true); isFullscreen = true; currentRes = Screen.resolutions[i + 1]; resolutionLabel.text = currentRes.width.ToString() + " x " + currentRes.height.ToString(); }
+                    else if (isFullscreen == true)
+                    {
+                        Screen.SetResolution(allRes[i + 1].width, allRes[i + 1].height, true);
+                        isFullscreen = true; currentRes = Screen.resolutions[i + 1];
+                        resolutionLabel.text = currentRes.width.ToString() + " x " + currentRes.height.ToString();
+                    }
                     //If the user is playing in a window. Then set the resoution to one element higher in the array, set the full screen boolean to false, reset the current resolution, and then update the resolution label.
-                    if (isFullscreen == false) { Screen.SetResolution(allRes[i + 1].width, allRes[i + 1].height, false); isFullscreen = false; currentRes = Screen.resolutions[i + 1]; resolutionLabel.text = currentRes.width.ToString() + " x " + currentRes.height.ToString(); }
+                    else if (isFullscreen == false)
+                    {
+                        Screen.SetResolution(allRes[i + 1].width, allRes[i + 1].height, false);
+                        isFullscreen = false; currentRes = Screen.resolutions[i + 1];
+                        resolutionLabel.text = currentRes.width.ToString() + " x " + currentRes.height.ToString();
+                    }
 
                     //Debug.Log("Res after: " + currentRes);
                 }
@@ -1109,12 +1124,25 @@ namespace GreatArcStudios
             {
                 if (allRes[i].height == currentRes.height && allRes[i].width == currentRes.width)
                 {
+                    if(i == 0)
+                    {
 
+                    }
                     //Debug.Log("found " + i);
                     //If the user is playing fullscreen. Then set the resoution to one element lower in the array, set the full screen boolean to true, reset the current resolution, and then update the resolution label.
-                    if (isFullscreen == true) { Screen.SetResolution(allRes[i - 1].width, allRes[i - 1].height, true); isFullscreen = true; currentRes = Screen.resolutions[i - 1]; resolutionLabel.text = currentRes.width.ToString() + " x " + currentRes.height.ToString(); }
+                    else if (isFullscreen == true)
+                    {
+                        Screen.SetResolution(allRes[i - 1].width, allRes[i - 1].height, true);
+                        isFullscreen = true; currentRes = Screen.resolutions[i - 1];
+                        resolutionLabel.text = currentRes.width.ToString() + " x " + currentRes.height.ToString();
+                    }
                     //If the user is playing in a window. Then set the resoution to one element lower in the array, set the full screen boolean to false, reset the current resolution, and then update the resolution label.
-                    if (isFullscreen == false) { Screen.SetResolution(allRes[i - 1].width, allRes[i - 1].height, false); isFullscreen = false; currentRes = Screen.resolutions[i - 1]; resolutionLabel.text = currentRes.width.ToString() + " x " + currentRes.height.ToString(); }
+                    else if (isFullscreen == false)
+                    {
+                        Screen.SetResolution(allRes[i - 1].width, allRes[i - 1].height, false);
+                        isFullscreen = false; currentRes = Screen.resolutions[i - 1];
+                        resolutionLabel.text = currentRes.width.ToString() + " x " + currentRes.height.ToString();
+                    }
 
                     //Debug.Log("Res after: " + currentRes);
                 }

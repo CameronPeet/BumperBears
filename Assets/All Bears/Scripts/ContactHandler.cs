@@ -95,12 +95,13 @@ public class ContactHandler : MonoBehaviour {
                     orb.Drop();
                 }
 
-                collision.gameObject.GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
-                collision.gameObject.GetComponent<Animator>().Play("Impact");
-                collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOComplete();
-                collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
+                print("add force to " + handler.name);
+                handler.GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
+                handler.gameObject.GetComponent<Animator>().Play("Impact");
+                handler.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOComplete();
+                handler.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
 
-                print("Velocity nulled for " + gameObject.name);
+                //print("Velocity nulled for " + gameObject.name);
 
                 GetComponent<Rigidbody>().angularVelocity *= 0.1f;
                 GetComponent<Rigidbody>().velocity *= 0.1f;
@@ -108,7 +109,6 @@ public class ContactHandler : MonoBehaviour {
                 if (handler != null)
                 {
                     handler.contactedThisFrame = true;
-
                 }
             }
 
@@ -117,22 +117,18 @@ public class ContactHandler : MonoBehaviour {
             {
                 Vector3 forceDir = contact.normal;
                 Vector3 force = forceDir * ((AddedForceMultiplier * 10) * (Mathf.Abs(PreviousVelocity / 30.0f)));
-                Vector3 forcePos = -contact.point;
+                Vector3 forcePos = contact.point;
 
+                print("add force to " + gameObject.name);
                 GetComponent<Rigidbody>().AddForceAtPosition(force, forcePos);
                 GetComponent<Animator>().Play("Impact");
                 GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOComplete();
                 GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial.DOColor(HitColor, TweenLength).From().SetEase(ColorEase);
 
 
-                print("Side > 0 : Velocity nulled for " + collision.gameObject.name);
-                collision.gameObject.GetComponent<Rigidbody>().angularVelocity *= 0.1f;
-                collision.gameObject.GetComponent<Rigidbody>().velocity *= 0.1f;
-
-                foreach (Orb orb in gameObject.GetComponentsInChildren<Orb>())
-                {
-                    orb.Drop();
-                }
+                //print("Side > 0 : Velocity nulled for " + collision.gameObject.name);
+                handler.GetComponent<Rigidbody>().angularVelocity *= 0.1f;
+                handler.gameObject.GetComponent<Rigidbody>().velocity *= 0.1f;
 
                 contactedThisFrame = true;
             }
@@ -188,6 +184,9 @@ public class ContactHandler : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         bearsHitBy.Remove(name);
+
+
+        print(gameObject.name + " REMOVED " + name);
     }
 
     private void OnDestroy()

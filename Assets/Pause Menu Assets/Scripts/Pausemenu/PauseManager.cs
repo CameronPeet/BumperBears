@@ -422,8 +422,20 @@ namespace GreatArcStudios
         /// </summary>
         public void returnToMenu()
         {
-            Application.LoadLevel(mainMenu);
             uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
+
+            Time.timeScale = timeScale;
+            mainPanel.SetActive(false);
+            vidPanel.SetActive(false);
+            audioPanel.SetActive(false);
+            TitleTexts.SetActive(false);
+            mask.SetActive(false);
+            for (int i = 0; i < otherUIElements.Length; i++)
+            {
+                otherUIElements[i].gameObject.SetActive(true);
+            }
+
+            mainCam.enabled = false;
         }
 
         // Update is called once per frame
@@ -451,6 +463,7 @@ namespace GreatArcStudios
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Start") && mainPanel.active == false )
             {
 
+                mainCam.enabled = true;
                 uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
                 mainPanel.SetActive(true);
                 vidPanel.SetActive(false);
@@ -468,6 +481,7 @@ namespace GreatArcStudios
                  }  */
             }
             else if(Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Start") && mainPanel.active == true) {
+                mainCam.enabled = false;
                 Time.timeScale = timeScale;
                 mainPanel.SetActive(false);
                 vidPanel.SetActive(false);

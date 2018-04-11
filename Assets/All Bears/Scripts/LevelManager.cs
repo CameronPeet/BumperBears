@@ -265,6 +265,26 @@ public class LevelManager : MonoBehaviour {
 
     }
 
+
+    public void ReturnToMainMenu()
+    {
+        
+        Destroy(FindObjectOfType<ScoreboardManager>().gameObject);
+        Player[] players = FindObjectsOfType<Player>();
+        foreach(Player player in players)
+        {
+            Destroy(player.gameObject);
+        }
+
+        HoverFollowCam[] cams = FindObjectsOfType<HoverFollowCam>();
+        foreach(HoverFollowCam cam in cams)
+        {
+            Destroy(cam.gameObject);
+        }
+
+        LoadScene("Testing_Lobby");
+    }
+
     public void CreateDebugPlayers()
     {
         Player[] players = FindObjectsOfType<Player>();

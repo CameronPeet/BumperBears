@@ -17,7 +17,7 @@ public class ArenaICE :  IArena
     protected Player[] Players;
 
     protected int m_PlayersLeft;
-    protected int m_Rounds = 0;
+    public int m_Rounds = 0;
     protected bool m_RoundOver = false;
     protected bool m_RoundInProgress = false;
 
@@ -92,7 +92,7 @@ public class ArenaICE :  IArena
 
     public virtual void OnArenaExit()
     {
-        LevelManager.LoadNextLevel();
+        LevelManager.ReturnToMainMenu();
     }
 
     public virtual void OnPlayerDeath(int PlayerID)
@@ -146,13 +146,16 @@ public class ArenaICE :  IArena
                         {
                             ScoreboardManager.Scoreboard.SetScore(WinningPlayer.gameObject.name, "asd", 10);
 
-                            if(scoreboard.Score >= 500)
+
+                            if(m_Rounds == 1)
                             {
-                                OnArenaExit();
+                                scoreboard.Activate();
                             }
+                            //if(scoreboard.Score >= 500)
+                            //{
+                            //    OnArenaExit();
+                            //}
                         }
-
-
                     }
                     //player.GetComponent<PlayerAnimator>().StartRotateCameraAroundPlayer();
                     return;
@@ -164,6 +167,15 @@ public class ArenaICE :  IArena
 
     public virtual void EndRound()
     {
+        Scoreboard scoreboard = WinningPlayer.GetComponent<Player>().Scoreboard;
+        if (WinningPlayer.GetComponent<Player>().Scoreboard)
+        {
+            if (scoreboard)
+            {
+                scoreboard.DeActivate();
+            }
+        }
+
         m_Rounds--;
         m_RoundOver = true;
 

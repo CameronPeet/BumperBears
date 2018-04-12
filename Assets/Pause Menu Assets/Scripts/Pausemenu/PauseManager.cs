@@ -333,18 +333,18 @@ namespace GreatArcStudios
             lastTexLimit = QualitySettings.masterTextureLimit;
             //set last shadow cascade 
             lastShadowCascade = QualitySettings.shadowCascades;
-            saveSettings.LoadGameSettings(File.ReadAllText(Application.persistentDataPath + "/" + saveSettings.fileName));
-            try
-            {
-                densityINI = Terrain.activeTerrain.detailObjectDensity;
-            }
-            catch
-            {
-                if (terrain = null)
-                {
-                    Debug.Log("Terrain Not Assigned");
-                }
-            }
+            // saveSettings.LoadGameSettings(File.ReadAllText(Application.persistentDataPath + "/" + saveSettings.fileName));
+            // try
+            // {
+            //     densityINI = Terrain.activeTerrain.detailObjectDensity;
+            // }
+            // catch
+            // {
+            //     if (terrain = null)
+            //     {
+            //         Debug.Log("Terrain Not Assigned");
+            //     }
+            // }
 
             //set the blur boolean to false;
             //blurBool = false;

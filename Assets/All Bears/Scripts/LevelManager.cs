@@ -282,7 +282,7 @@ public class LevelManager : MonoBehaviour {
             Destroy(cam.gameObject);
         }
 
-        LoadScene("Testing_Lobby");
+        LoadScene("MainMenu");
     }
 
     public void CreateDebugPlayers()

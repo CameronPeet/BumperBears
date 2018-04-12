@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MenuController : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class MenuController : MonoBehaviour
 	private float menuScrollTimer = 0.0f;
 	private bool canScroll = true;
 
+    EventSystem eventSystem;
 	/// <summary>
 	/// Start is called on the frame when a script is enabled just before
 	/// any of the Update methods is called the first time.
@@ -36,15 +38,49 @@ public class MenuController : MonoBehaviour
 	{
 		SelectCurrentMainMenuOption (0);
 		LoadMenuItem(mainMenu, false, true);
-	}
+
+
+    }
 
 	// Update is called once per frame
 	void Update ()
 	{
 		if (canScroll)
 		{
-			// Keyboard
-			if (Input.anyKey)
+            if (Input.GetButtonDown("Submit"))
+            {
+                ClickButtonFromMainMenu();
+            }
+            // Controller
+            int menuInput = (int)Input.GetAxisRaw("Vertical");
+
+            if (menuInput != 0)
+            {
+                canScroll = false;
+            }
+            // Go up?
+            if (menuInput == 1)
+            {
+                mainMenuIndex--;
+                if (mainMenuIndex < 0)
+                {
+                    mainMenuIndex = mainMenuButtons.Length - 1;
+                }
+                SelectCurrentMainMenuOption(mainMenuIndex);
+            }
+            // Go down
+            else if (menuInput == -1)
+            {
+                mainMenuIndex++;
+                if (mainMenuIndex > mainMenuButtons.Length - 1)
+                {
+                    mainMenuIndex = 0;
+                }
+                SelectCurrentMainMenuOption(mainMenuIndex);
+            }
+
+            // Keyboard
+            if (Input.anyKey)
 			{
 				canScroll = false;
 
@@ -73,26 +109,6 @@ public class MenuController : MonoBehaviour
 				}
 
 				SelectCurrentMainMenuOption (mainMenuIndex);
-			}
-			else
-			{
-				// Controller
-				int menuInput = (int) Input.GetAxisRaw ("Vertical");
-
-				if (menuInput != 0)
-				{
-					canScroll = false;
-				}
-				// Go up?
-				if (menuInput == 1)
-				{
-					Debug.LogFormat ("Input: 1");
-				}
-				// Go down
-				else if (menuInput == -1)
-				{
-					Debug.LogFormat ("Input: -1");
-				}
 			}
 		}
 		else

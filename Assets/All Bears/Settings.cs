@@ -25,16 +25,16 @@ public class Settings : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         iDetectedScreens = Display.displays.Length;
 
-        if(iDetectedScreens > 1)
-        {
-            GameObject popup = Instantiate(DualScreensPopup);
-            EventSystem es = FindObjectOfType<EventSystem>();
-            if(es)
-            {
-                es.SetSelectedGameObject(popup.GetComponentInChildren<Button>().gameObject);
-            }
+        //if(iDetectedScreens > 1)
+        //{
+        //    GameObject popup = Instantiate(DualScreensPopup);
+        //    EventSystem es = FindObjectOfType<EventSystem>();
+        //    if(es)
+        //    {
+        //        es.SetSelectedGameObject(popup.GetComponentInChildren<Button>().gameObject);
+        //    }
 
-        }
+        //}
 
         Initialised = true;
 	}

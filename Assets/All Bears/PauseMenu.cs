@@ -9,14 +9,18 @@ public class PauseMenu : MonoBehaviour {
 
     public Canvas Menu;
 
+    public bool InLobby = false;
 
     public GameObject defualtSelectedMain;
 
     void Update()
     {
-        if (Input.GetButtonDown("Start"))
+        if(!InLobby)
         {
-            Pause();
+            if (Input.GetButtonDown("Start"))
+            {
+                Pause();
+            }
         }
     }
     // Update is called once per frame

@@ -72,7 +72,20 @@ public class Lobby : MonoBehaviour {
             }
         }
 
-
+        for(int i = 1; i <= InputsLeft.Count; i++)
+        {
+            if (!InputsLeft.Contains(i))
+            {
+                if(Input.GetButtonDown("Start_" + i))
+                {
+                    PauseMenu p = FindObjectOfType<PauseMenu>();
+                    if(p != null)
+                    {
+                        p.Pause();
+                    }
+                }
+            }
+        }
     }
 
     void HandlePlayersJoined()

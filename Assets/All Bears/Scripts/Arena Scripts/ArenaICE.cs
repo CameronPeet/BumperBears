@@ -44,7 +44,7 @@ public class ArenaICE :  IArena
         if (!m_RoundInProgress)
         {
             //Wait for input, stop winner animation, start next round or start next level.
-            if (Input.GetButtonDown("Submit"))
+            if (Input.GetButtonDown("AButton_1") || Input.GetButtonDown("AButton_2") || Input.GetButtonDown("AButton_3") || Input.GetButtonDown("AButton_4"))
             {
                 EndRound();
             }

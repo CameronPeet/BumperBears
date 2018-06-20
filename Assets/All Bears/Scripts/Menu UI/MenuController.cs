@@ -142,7 +142,6 @@ public class MenuController : MonoBehaviour
 				cb.colorMultiplier = 1;
 				cb.normalColor = new Color (0.8f, 0.8f, 0.8f);
 			}
-
 			b.colors = cb;
 		}
 	}

@@ -7,7 +7,7 @@ using DG.Tweening;
 public class ArenaICE :  IArena
 {
 
-
+    public Camera MainCamera;
 
     //Pre-requisites
     protected LevelManager LevelManager;
@@ -44,7 +44,7 @@ public class ArenaICE :  IArena
         if (!m_RoundInProgress)
         {
             //Wait for input, stop winner animation, start next round or start next level.
-            if (Input.GetButtonDown("AButton_1") || Input.GetButtonDown("AButton_2") || Input.GetButtonDown("AButton_3") || Input.GetButtonDown("AButton_4"))
+            if (Input.GetButtonDown("Submit"))
             {
                 EndRound();
             }
@@ -258,7 +258,7 @@ public class ArenaICE :  IArena
             player.GetComponent<Player>().PlayingAndEnabled = true;
         }
 
-        Camera.main.DORect(Rect.zero, 1.0f);
+        MainCamera.DORect(Rect.zero, 1.0f);
         StartCoroutine("EndIntro");
     }
 
@@ -272,7 +272,8 @@ public class ArenaICE :  IArena
             yield return null;
         }
 
-        Camera.main.gameObject.SetActive(false);
+
+        MainCamera.gameObject.SetActive(false);
 
 
 
